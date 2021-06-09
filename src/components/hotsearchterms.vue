@@ -1,10 +1,10 @@
 <!--
  * @Description: lastupdate
  * @Author: minggege
- * @Date: 2021-05-31 09:28:39
- * @LastEditTime: 2021-06-09 13:55:01
+ * @Date: 2021-06-09 16:09:27
+ * @LastEditTime: 2021-06-09 16:12:18
  * @LastEditors: minggege
- * @FilePath: \extensions\src\components\industrycomposition.vue
+ * @FilePath: \extensions\src\components\hotsearchterms.vue
 -->
 <template>
   <v-main>
@@ -19,19 +19,22 @@
           <v-row justify="end">
             <v-col cols="12" sm="11">
               <div class="text-h6 mb-6">
-              {{'行业构成_'+currentDate+'_所有终端_全部'}}
+              {{'热搜搜索词_'+currentDate+'_所有终端_全部'}}
               </div>
             </v-col>
             <v-col cols="12" sm="1">
-              <v-btn icon color="gray" style="margin-left: 4.8vw" @click="close">
+              <v-btn
+                icon
+                color="gray"
+                style="margin-left: 4.8vw"
+                @click="close"
+              >
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-col>
           </v-row>
         </v-card-title>
         <v-card-text>
-          <!--不规则格子-->
-
           <!--表格组件-->
           <mtable
             :headers="tableData.headers"
@@ -59,24 +62,26 @@ export default {
   components: { mtable },
   data() {
     return {
-      currentDate: "",
       dialog: false,
+      currentDate: "",
       dialogWidth: window.innerWidth - 100,
       dialogHeight: window.innerHeight - 50,
       tableData: {
         headers: [
           {
-            text: "类目名",
+            text: "搜索词",
             align: "start",
             sortable: false,
             value: "name",
           },
-          { text: "父行业类目名", value: "calories" },
-          { text: "交易金额", value: "fat" },
-          { text: "父行业交易金额", value: "carbs" },
-          { text: "交易增长幅度", value: "protein" },
-          { text: "交易金额较父行业占比", value: "iron" },
-          { text: "支付子订单数较父行业占比", value: "iron" },
+          { text: "日期", value: "calories" },
+          { text: "热度排行", value: "fat" },
+          { text: "搜索人数", value: "carbs" },
+          { text: "点击人数", value: "protein" },
+          { text: "点击率", value: "protein" },
+          { text: "商家点击率", value: "iron" },
+          { text: "父行业有交易卖家数", value: "iron" },
+          { text: "父行业有交易卖家数占比", value: "iron" },
         ],
         dataList: [
           {
@@ -159,7 +164,7 @@ export default {
     this.currentDate=this.getCurrnetDate()
   },
   methods: {
-     //==获取当前日期 格式为yyyy-MM-dd==//
+    //==获取当前日期 格式为yyyy-MM-dd==//
     getCurrnetDate() {
       let date = new Date()
       let year = date.getFullYear()
@@ -176,7 +181,7 @@ export default {
       //==加载数据==//
       this.queryData()
     },
-    //==关闭模态框==//
+    //===关闭模态框=//
     close() {
       this.dialog = false
     },
@@ -200,10 +205,12 @@ export default {
         url,
         header,
         resposeData => {
-          this.tableData.dataList = JSON.parse(this.$tools.AESDecrypt(resposeData))
+          this.tableData.dataList = JSON.parse(
+            this.$tools.AESDecrypt(resposeData)
+          )
         },
         () => {
-          this.loading = false
+          this.loading = false;
         }
       )
     }
@@ -212,4 +219,3 @@ export default {
 </script>
 <style scoped>
 </style>>
-

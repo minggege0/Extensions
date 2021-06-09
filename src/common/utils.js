@@ -2,7 +2,7 @@
  * @Description: lastupdate
  * @Author: minggege
  * @Date: 2021-05-31 10:53:06
- * @LastEditTime: 2021-05-31 12:17:49
+ * @LastEditTime: 2021-06-09 13:50:45
  * @LastEditors: minggege
  * @FilePath: \extensions\src\common\utils.js
  */
@@ -13,7 +13,7 @@ module.exports = {
             headers: header
         }).then((respose) => {
             if (successCall)
-                successCall(respose.data.data)
+                successCall(respose.data)
             if (finalCall)
                 finalCall()
         }).catch((respose) => {
